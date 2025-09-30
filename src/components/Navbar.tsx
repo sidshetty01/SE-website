@@ -1,5 +1,5 @@
 import { Link, useLocation } from "react-router-dom";
-import { Menu, X, Plane } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { useState } from "react";
 import { Button } from "./ui/button";
 
@@ -24,7 +24,7 @@ const Navbar = () => {
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-3 group">
             <div className="relative">
-              <Plane className="h-8 w-8 text-primary animate-float" />
+              <img src="/image%20(2)%20(1).png" alt="Logo" className="h-8 w-8 rounded-md object-contain animate-float" />
               <div className="absolute inset-0 bg-primary blur-xl opacity-50 group-hover:opacity-75 transition-opacity" />
             </div>
             <div>
@@ -49,7 +49,7 @@ const Navbar = () => {
               </Link>
             ))}
             <Button variant="hero" size="sm" className="ml-4" asChild>
-              <Link to="/auth">Sign In</Link>
+              <Link to="/auth">Members</Link>
             </Button>
           </div>
 
@@ -81,7 +81,7 @@ const Navbar = () => {
             ))}
             <div className="pt-2">
               <Button variant="hero" className="w-full" asChild>
-                <Link to="/auth">Sign In</Link>
+                <Link to="/auth">Members</Link>
               </Button>
             </div>
           </div>
