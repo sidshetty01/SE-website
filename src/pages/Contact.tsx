@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Mail, MapPin, Phone, Send } from "lucide-react";
+import { Mail, MapPin, Send, Linkedin, Twitter } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -68,17 +68,31 @@ const Contact = () => {
                   </div>
                   <div>
                     <h3 className="font-semibold mb-1">Email</h3>
-                    <p className="text-muted-foreground">sidshettyedu@gmail.com</p>
+                    <p className="text-muted-foreground">tseofficial2011@gmail.com</p>
                   </div>
                 </div>
 
                 <div className="flex items-start gap-4">
                   <div className="p-3 rounded-lg bg-primary/10">
-                    <Phone className="h-6 w-6 text-primary" />
+                    <Linkedin className="h-6 w-6 text-primary" />
                   </div>
                   <div>
-                    <h3 className="font-semibold mb-1">Phone</h3>
-                    <p className="text-muted-foreground">+1 (555) 123-4567</p>
+                    <h3 className="font-semibold mb-1">LinkedIn</h3>
+                    <a href="https://www.linkedin.com/in/soaring-eagles-a7a19831b?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">
+                      linkedin.com/in/soaring-eagles-a7a19831b
+                    </a>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-4">
+                  <div className="p-3 rounded-lg bg-primary/10">
+                    <Twitter className="h-6 w-6 text-primary" />
+                  </div>
+                  <div>
+                    <h3 className="font-semibold mb-1">X (Twitter)</h3>
+                    <a href="https://x.com/TSE_015" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">
+                      x.com/TSE_015
+                    </a>
                   </div>
                 </div>
 
@@ -89,23 +103,16 @@ const Contact = () => {
                   <div>
                     <h3 className="font-semibold mb-1">Location</h3>
                     <p className="text-muted-foreground">
-                      Engineering Building, Room 301<br />
-                      University Campus<br />
-                      City, State 12345
+                      Soaring Eagles Aeromodelling Lab<br />
+                      Near Mechanical Block,<br /> Siddaganga Institute of Technology<br />
+                      Tumkur, 572103
                     </p>
                   </div>
                 </div>
               </div>
             </div>
 
-            <div className="card-glow p-8 rounded-xl glass">
-              <h3 className="text-xl font-bold mb-4">Office Hours</h3>
-              <div className="space-y-2 text-muted-foreground">
-                <p><span className="font-semibold text-foreground">Monday - Friday:</span> 3:00 PM - 7:00 PM</p>
-                <p><span className="font-semibold text-foreground">Saturday:</span> 10:00 AM - 4:00 PM</p>
-                <p><span className="font-semibold text-foreground">Sunday:</span> Closed</p>
-              </div>
-            </div>
+            
           </motion.div>
 
           {/* Contact Form */}

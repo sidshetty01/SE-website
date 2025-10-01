@@ -3,6 +3,7 @@ import { ArrowRight, Zap, Users, Trophy } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import heroImage from "@/assets/hero-drones.jpg";
+import seEmblem from "../../image (2) (1).png";
 
 const Home = () => {
   return (
@@ -46,6 +47,13 @@ const Home = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
+            <div className="flex justify-center mb-6">
+              <img
+                src={seEmblem}
+                alt="Soaring Eagles Logo"
+                className="w-28 h-28 md:w-36 md:h-36 rounded-full shadow-glow-strong border border-primary/30 object-contain bg-background/60"
+              />
+            </div>
             <h1 className="text-5xl md:text-7xl font-bold mb-6">
               <span className="glow-primary">Soaring Eagles</span>
             </h1>

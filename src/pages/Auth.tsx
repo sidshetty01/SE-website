@@ -52,7 +52,7 @@ const Auth = () => {
   const members: MemberProfile[] = useMemo(() => {
     const raw = localStorage.getItem("se.members");
     return raw ? (JSON.parse(raw) as MemberProfile[]) : [];
-  }, [activeMember]);
+  }, []);
 
   const saveMembers = (next: MemberProfile[]) => {
     localStorage.setItem("se.members", JSON.stringify(next));

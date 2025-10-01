@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { ExternalLink, Github } from "lucide-react";
+import { ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const Projects = () => {
@@ -110,15 +110,11 @@ const Projects = () => {
                   whileInView={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.6, delay: 0.6 }}
                   viewport={{ once: true }}
-                  className="flex gap-4 pt-4"
+                  className="pt-4"
                 >
-                  <Button variant="hero" className="group">
+                  <Button variant="hero" className="group w-full">
                     View Details
                     <ExternalLink className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
-                  </Button>
-                  <Button variant="outline-hero">
-                    <Github className="mr-2 h-4 w-4" />
-                    Code
                   </Button>
                 </motion.div>
               </div>
