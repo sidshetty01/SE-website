@@ -14,7 +14,76 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      workshop_registrations: {
+        Row: {
+          id: number
+          name: string
+          usn: string
+          year: string
+          department: string
+          phoneNumber: string
+          email: string
+          timestamp: string
+        }
+        Insert: {
+          id?: number
+          name: string
+          usn: string
+          year: string
+          department: string
+          phoneNumber: string
+          email: string
+          timestamp: string
+        }
+        Update: {
+          id?: number
+          name?: string
+          usn?: string
+          year?: string
+          department?: string
+          phoneNumber?: string
+          email?: string
+          timestamp?: string
+        }
+      }
+      recruitment_registrations: {
+        Row: {
+          id: number
+          name: string
+          year: string
+          department: string
+          usn: string
+          contactNumber: string
+          inCollegeClub: string
+          clubName: string | null
+          skills: string
+          timestamp: string
+        }
+        Insert: {
+          id?: number
+          name: string
+          year: string
+          department: string
+          usn: string
+          contactNumber: string
+          inCollegeClub: string
+          clubName?: string | null
+          skills: string
+          timestamp: string
+        }
+        Update: {
+          id?: number
+          name?: string
+          year?: string
+          department?: string
+          usn?: string
+          contactNumber?: string
+          inCollegeClub?: string
+          clubName?: string | null
+          skills?: string
+          timestamp?: string
+        }
+      }
     }
     Views: {
       [_ in never]: never
