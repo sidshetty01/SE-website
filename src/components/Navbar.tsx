@@ -13,6 +13,7 @@ const Navbar = () => {
     { name: "Projects", path: "/projects" },
     { name: "Timeline", path: "/timeline" },
     { name: "Contact", path: "/contact" },
+    { name: "Admin", path: "/admin" },
   ];
 
   const isActive = (path: string) => location.pathname === path;
@@ -49,7 +50,7 @@ const Navbar = () => {
               </Link>
             ))}
             <Button variant="hero" size="sm" className="ml-4" asChild>
-              <Link to="/auth">Members</Link>
+
             </Button>
           </div>
 
@@ -81,7 +82,7 @@ const Navbar = () => {
             ))}
             <div className="pt-2">
               <Button variant="hero" className="w-full" asChild>
-                <Link to="/auth">Members</Link>
+
               </Button>
             </div>
           </div>

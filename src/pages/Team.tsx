@@ -1,5 +1,6 @@
 import { Mail, Linkedin, Twitter } from "lucide-react";
 import { teamByYear } from "@/data/team";
+import { motion } from "framer-motion";
 
 const Team = () => {
 

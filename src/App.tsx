@@ -10,8 +10,8 @@ import Team from "./pages/Team";
 import Projects from "./pages/Projects";
 import Timeline from "./pages/Timeline";
 import Contact from "./pages/Contact";
-import Login from "./pages/Login";
-import Auth from "./pages/Auth";
+import Admin from "./pages/Admin";
+
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -40,8 +40,8 @@ const App = () => (
           <Route path="/projects" element={<Projects />} />
           <Route path="/timeline" element={<Timeline />} />
           <Route path="/contact" element={<Contact />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/auth" element={<Auth />} />
+          <Route path="/admin" element={<Admin />} />
+
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { RecruitmentForm, WorkshopForm } from "@/components/SimpleRegistrationForms";
 import seEmblem from "../../image (2) (1).png";
 
 const Timeline = () => {
@@ -44,21 +45,33 @@ const Timeline = () => {
 
   const upcomingEvents = [
     {
-      date: "Nov 2025",
-      title: "Inter-College RC Plane Showcase",
-      description: "Open fly day and static display of our latest RC planes and drones.",
+      date: "Oct 2025",
+      title: "Lift-Off Workshop",
+      description: "This workshop, for first- and second-year students, includes an introductory tech talk, glider making, flight practice, and a quiz, providing both foundational knowledge and hands-on experience in drones and aerial robotics.",
       icon: undefined,
     },
     {
-      date: "Dec 2025",
-      title: "Winter Build Camp",
-      description: "Hands-on 2-week camp to onboard new members and build trainer aircraft.",
+      date: "Nov 2025",
+      title: "Recruitments 2025-26",
+      description: "Recruitments for Team Soaring Eagles are open exclusively for first- and second-year students, offering them a chance to learn, build, and compete in drones and aerial robotics as part of an innovative team.",
       icon: undefined,
     },
     {
       date: "Jan 2026",
-      title: "Field Trials",
-      description: "Full-day testing of navigation and telemetry at the airstrip (weather permitting).",
+      title: "Autonomous Drone Development & Control (ADDC) WorkshopSecond phase",
+      description: "ADDC (Autonomous Drone Development & Control) is a workshop focused on building and programming drones for autonomous navigation and control, enhancing practical skills in aerial robotics.",
+      icon: undefined,
+    },
+    {
+      date: "Jan 2026",
+      title: " Drone Development Challenge 2025-26 Second Phase",
+      description: "DDC (Drone Development Challenge) is a competition where participants design, build, and operate drones, testing skills in innovation, engineering, and aerial problem-solving.",
+      icon: undefined,
+    },
+    {
+      date: "Jan 2026",
+      title: "NIDAR Final Round",
+      description: "NIDAR is a national-level drone innovation and research competition that challenges students to design, build, and showcase advanced drone technologies. It fosters creativity, teamwork, and problem-solving in real-world aerial robotics applications.",
       icon: undefined,
     },
   ];
@@ -78,7 +91,7 @@ const Timeline = () => {
           </p>
         </motion.div>
 
-        <Tabs defaultValue="journey" className="w-full">
+        <Tabs defaultValue="journey" className="w-full">n
           <TabsList className="grid grid-cols-2 max-w-md mx-auto mb-10">
             <TabsTrigger value="journey">Our Journey</TabsTrigger>
             <TabsTrigger value="upcoming">Upcoming Events</TabsTrigger>
@@ -151,7 +164,11 @@ const Timeline = () => {
                       <h3 className="text-2xl font-bold mb-3 group-hover:text-primary transition-colors">
                         {event.title}
                       </h3>
-                      <p className="text-muted-foreground">{event.description}</p>
+                      <p className="text-muted-foreground mb-4">{event.description}</p>
+                      
+                      {/* Add registration buttons for specific events */}
+                      {event.title === "Lift-Off Workshop" && <WorkshopForm />}
+                      {event.title === "Recruitments 2025-26" && <RecruitmentForm />}
                     </div>
                   </motion.div>
                 ))}
