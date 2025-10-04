@@ -49,22 +49,34 @@ export const RecruitmentForm = () => {
       ...data,
       timestamp: new Date().toISOString(),
     };
-    // Save to 'recruitment_registrations' table
-  // use supabase directly
-    const { error } = await supabase
-  .from<any, any>('recruitment_registrations')
-  .insert([formData]);
-    if (!error) {
+    
+    try {
+      // Save to 'recruitment_registrations' table
+      const { error } = await supabase
+        .from('recruitment_registrations')
+        .insert([formData]);
+      
+      if (error) {
+        console.error('Supabase error:', error);
+        toast({
+          title: "Error",
+          description: `Failed to submit: ${error.message}`,
+          variant: "destructive",
+        });
+        return;
+      }
+      
       toast({
         title: "Registration Successful! 🎉",
         description: "Your recruitment application has been submitted to the cloud.",
       });
       reset();
       setIsOpen(false);
-    } else {
+    } catch (err) {
+      console.error('Submission error:', err);
       toast({
         title: "Error",
-        description: "Failed to submit registration to the cloud.",
+        description: "Failed to submit registration. Please try again.",
         variant: "destructive",
       });
     }
@@ -201,25 +213,36 @@ export const WorkshopForm = () => {
   const onSubmit = async (data: WorkshopFormData) => {
     const formData = {
       ...data,
-      contactNumber: data.phoneNumber,
       timestamp: new Date().toISOString(),
     };
-    // Save to 'workshop_registrations' table
-    // Use supabase directly
-    const { error } = await supabase
-      .from('workshop_registrations')
-      .insert([formData]);
-    if (!error) {
+    
+    try {
+      // Save to 'workshop_registrations' table
+      const { error } = await supabase
+        .from('workshop_registrations')
+        .insert([formData]);
+      
+      if (error) {
+        console.error('Supabase error:', error);
+        toast({
+          title: "Error",
+          description: `Failed to submit: ${error.message}`,
+          variant: "destructive",
+        });
+        return;
+      }
+      
       toast({
         title: "Registration Successful! 🎉",
         description: "Your workshop registration has been submitted to the cloud.",
       });
       reset();
       setIsOpen(false);
-    } else {
+    } catch (err) {
+      console.error('Submission error:', err);
       toast({
         title: "Error",
-        description: "Failed to submit registration to the cloud.",
+        description: "Failed to submit registration. Please try again.",
         variant: "destructive",
       });
     }

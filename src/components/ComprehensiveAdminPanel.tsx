@@ -16,8 +16,8 @@ import { RecruitmentForm, WorkshopForm } from "@/components/SimpleRegistrationFo
 import RegistrationsTab from "@/components/RegistrationsTab";
 
 // Admin credentials
-const ADMIN_USERNAME = "tse2011";
-const ADMIN_PASSWORD = "SoaringEagles@2011SIT";
+const ADMIN_USERNAME = "1@1.com";
+const ADMIN_PASSWORD = "12345";
 
 // Storage keys for registrations
 const RECRUITMENT_STORAGE_KEY = "soaring_eagles_recruitment_data";

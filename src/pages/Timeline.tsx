@@ -93,51 +93,9 @@ const Timeline = () => {
 
         <Tabs defaultValue="journey" className="w-full">n
           <TabsList className="grid grid-cols-2 max-w-md mx-auto mb-10">
-            <TabsTrigger value="journey">Our Journey</TabsTrigger>
             <TabsTrigger value="upcoming">Upcoming Events</TabsTrigger>
+            <TabsTrigger value="journey">Our Journey</TabsTrigger>
           </TabsList>
-
-          <TabsContent value="journey">
-            <div className="relative">
-              <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-gradient-to-b from-primary via-accent to-primary" />
-              <div className="space-y-12">
-                {timelineEvents.map((event, index) => (
-                  <motion.div
-                    key={event.year}
-                    initial={{ opacity: 0, x: -50 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.6, delay: index * 0.1 }}
-                    viewport={{ once: true }}
-                    className="relative pl-20"
-                  >
-                    <div className="absolute left-0 flex items-center justify-center">
-                      <div className="w-16 h-16 rounded-full bg-background/60 border border-primary/30 shadow-glow-strong overflow-hidden">
-                        <img src={seEmblem} alt="SE Emblem" className="w-full h-full object-cover" />
-                      </div>
-                    </div>
-
-                    <div className="card-glow p-6 rounded-xl glass group cursor-pointer">
-                      <div className="flex items-start justify-between mb-3">
-                        <span className="text-3xl font-bold text-gradient">{event.year}</span>
-                      </div>
-                      <h3 className="text-2xl font-bold mb-3 group-hover:text-primary transition-colors">
-                        {event.title}
-                      </h3>
-                      <p className="text-muted-foreground">{event.description}</p>
-                    </div>
-                  </motion.div>
-                ))}
-              </div>
-              <motion.div
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                transition={{ duration: 1 }}
-                viewport={{ once: true }}
-                className="absolute left-8 -bottom-8 w-16 h-16 rounded-full bg-primary blur-2xl"
-              />
-            </div>
-          </TabsContent>
-
           <TabsContent value="upcoming">
             <div className="relative">
               <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-gradient-to-b from-primary via-accent to-primary" />
@@ -169,6 +127,46 @@ const Timeline = () => {
                       {/* Add registration buttons for specific events */}
                       {event.title === "Lift-Off Workshop" && <WorkshopForm />}
                       {event.title === "Recruitments 2025-26" && <RecruitmentForm />}
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+              <motion.div
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                transition={{ duration: 1 }}
+                viewport={{ once: true }}
+                className="absolute left-8 -bottom-8 w-16 h-16 rounded-full bg-primary blur-2xl"
+              />
+            </div>
+          </TabsContent>
+          <TabsContent value="journey">
+            <div className="relative">
+              <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-gradient-to-b from-primary via-accent to-primary" />
+              <div className="space-y-12">
+                {timelineEvents.map((event, index) => (
+                  <motion.div
+                    key={event.year}
+                    initial={{ opacity: 0, x: -50 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.6, delay: index * 0.1 }}
+                    viewport={{ once: true }}
+                    className="relative pl-20"
+                  >
+                    <div className="absolute left-0 flex items-center justify-center">
+                      <div className="w-16 h-16 rounded-full bg-background/60 border border-primary/30 shadow-glow-strong overflow-hidden">
+                        <img src={seEmblem} alt="SE Emblem" className="w-full h-full object-cover" />
+                      </div>
+                    </div>
+
+                    <div className="card-glow p-6 rounded-xl glass group cursor-pointer">
+                      <div className="flex items-start justify-between mb-3">
+                        <span className="text-3xl font-bold text-gradient">{event.year}</span>
+                      </div>
+                      <h3 className="text-2xl font-bold mb-3 group-hover:text-primary transition-colors">
+                        {event.title}
+                      </h3>
+                      <p className="text-muted-foreground">{event.description}</p>
                     </div>
                   </motion.div>
                 ))}
