@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
-import { useForm } from "react-hook-form";
+import { useForm, Controller } from "react-hook-form"; // ✅ Add Controller
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -21,83 +21,70 @@ interface RecruitmentFormData {
   inCollegeClub: "yes" | "no";
   clubName?: string;
   skills: string;
-  timestamp: string;
 }
 
 interface WorkshopFormData {
-  // Team Leader
+  teamName: string;
   name: string;
   usn: string;
   year: string;
   department: string;
   phoneNumber: string;
   email: string;
-  // Member 2
   member2Name: string;
   member2Usn: string;
   member2Department: string;
   member2Phone: string;
- 
-  // Member 3
   member3Name: string;
   member3Usn: string;
   member3Department: string;
   member3Phone: string;
-  
-  // Member 4
   member4Name: string;
   member4Usn: string;
   member4Department: string;
   member4Phone: string;
-
-  // Payment
-  paymentScreenshot: File | null;
-  timestamp: string;
+  paymentScreenshot: string;
 }
 
-// Local storage keys
-const RECRUITMENT_STORAGE_KEY = "soaring_eagles_recruitment_data";
-const WORKSHOP_STORAGE_KEY = "soaring_eagles_workshop_data";
-
 export const RecruitmentForm = () => {
-  const { register, handleSubmit, watch, reset, formState: { errors } } = useForm<RecruitmentFormData>();
+  const { register, handleSubmit, watch, reset, control, formState: { errors } } = useForm<RecruitmentFormData>(); // ✅ Add control
   const [isOpen, setIsOpen] = useState(false);
   const { toast } = useToast();
   const inCollegeClub = watch("inCollegeClub");
 
   const onSubmit = async (data: RecruitmentFormData) => {
     const formData = {
-      ...data,
+      name: data.name,
+      year: data.year,
+      department: data.department,
+      usn: data.usn,
+      contactNumber: data.contactNumber,
+      inCollegeClub: data.inCollegeClub,
+      clubName: data.clubName || null,
+      skills: data.skills,
       timestamp: new Date().toISOString(),
     };
-    
-    try {
-      // Save to 'recruitment_registrations' table
-      const { error } = await supabase
-        .from('recruitment_registrations')
-        .insert([formData]);
-      
-      if (error) {
-        console.error('Supabase error:', error);
-        toast({
-          title: "Error",
-          description: `Failed to submit: ${error.message}`,
-          variant: "destructive",
-        });
-        return;
-      }
-      
+
+    console.log("📤 Submitting recruitment data:", formData);
+
+    const { error } = await supabase
+      .from('recruitment_registrations')
+      .insert([formData])
+      .select();
+
+    if (!error) {
+      console.log("✅ Recruitment submitted successfully");
       toast({
         title: "Registration Successful! 🎉",
         description: "Your recruitment application has been submitted to the cloud.",
       });
       reset();
       setIsOpen(false);
-    } catch (err) {
-      console.error('Submission error:', err);
+    } else {
+      console.error("❌ Recruitment error:", error);
       toast({
         title: "Error",
-        description: "Failed to submit registration. Please try again.",
+        description: `Failed to submit: ${error.message}`,
         variant: "destructive",
       });
     }
@@ -117,7 +104,7 @@ export const RecruitmentForm = () => {
             Recruitment Registration 2025-26
           </DialogTitle>
         </DialogHeader>
-        
+
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
@@ -130,17 +117,26 @@ export const RecruitmentForm = () => {
               {errors.name && <p className="text-red-500 text-sm">{errors.name.message}</p>}
             </div>
 
+            {/* ✅ FIXED: Use Controller for Select */}
             <div>
               <Label htmlFor="year">Year *</Label>
-              <Select onValueChange={(value) => register("year").onChange({ target: { value } })}>
-                <SelectTrigger>
-                  <SelectValue placeholder="Select your year" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="1st">1st Year</SelectItem>
-                  <SelectItem value="2nd">2nd Year</SelectItem>
-                </SelectContent>
-              </Select>
+              <Controller
+                name="year"
+                control={control}
+                rules={{ required: "Year is required" }}
+                render={({ field }) => (
+                  <Select onValueChange={field.onChange} value={field.value}>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select your year" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="1st">1st Year</SelectItem>
+                      <SelectItem value="2nd">2nd Year</SelectItem>
+                    </SelectContent>
+                  </Select>
+                )}
+              />
+              {errors.year && <p className="text-red-500 text-sm">{errors.year.message}</p>}
             </div>
 
             <div>
@@ -167,7 +163,7 @@ export const RecruitmentForm = () => {
               <Label htmlFor="contactNumber">Contact Number *</Label>
               <Input
                 id="contactNumber"
-                {...register("contactNumber", { 
+                {...register("contactNumber", {
                   required: "Contact number is required",
                   pattern: { value: /^[0-9]{10}$/, message: "Enter valid 10-digit number" }
                 })}
@@ -177,21 +173,31 @@ export const RecruitmentForm = () => {
             </div>
           </div>
 
+          {/* ✅ FIXED: Use Controller for RadioGroup */}
           <div>
             <Label>Are you present in any college club? *</Label>
-            <RadioGroup
-              onValueChange={(value) => register("inCollegeClub").onChange({ target: { value } })}
-              className="flex space-x-4 mt-2"
-            >
-              <div className="flex items-center space-x-2">
-                <RadioGroupItem value="yes" id="yes" />
-                <Label htmlFor="yes">Yes</Label>
-              </div>
-              <div className="flex items-center space-x-2">
-                <RadioGroupItem value="no" id="no" />
-                <Label htmlFor="no">No</Label>
-              </div>
-            </RadioGroup>
+            <Controller
+              name="inCollegeClub"
+              control={control}
+              rules={{ required: "Please select an option" }}
+              render={({ field }) => (
+                <RadioGroup
+                  onValueChange={field.onChange}
+                  value={field.value}
+                  className="flex space-x-4 mt-2"
+                >
+                  <div className="flex items-center space-x-2">
+                    <RadioGroupItem value="yes" id="yes" />
+                    <Label htmlFor="yes">Yes</Label>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <RadioGroupItem value="no" id="no" />
+                    <Label htmlFor="no">No</Label>
+                  </div>
+                </RadioGroup>
+              )}
+            />
+            {errors.inCollegeClub && <p className="text-red-500 text-sm">{errors.inCollegeClub.message}</p>}
           </div>
 
           {inCollegeClub === "yes" && (
@@ -227,43 +233,55 @@ export const RecruitmentForm = () => {
 };
 
 export const WorkshopForm = () => {
-  const { register, handleSubmit, reset, formState: { errors } } = useForm<WorkshopFormData>();
+  const { register, handleSubmit, reset, control, formState: { errors } } = useForm<WorkshopFormData>(); // ✅ Add control
   const [isOpen, setIsOpen] = useState(false);
   const { toast } = useToast();
 
   const onSubmit = async (data: WorkshopFormData) => {
     const formData = {
-      ...data,
+      teamName: data.teamName,
+      name: data.name,
+      usn: data.usn,
+      year: data.year,
+      department: data.department,
+      phoneNumber: data.phoneNumber,
+      email: data.email,
+      member2Name: data.member2Name,
+      member2Usn: data.member2Usn,
+      member2Department: data.member2Department,
+      member2Phone: data.member2Phone,
+      member3Name: data.member3Name,
+      member3Usn: data.member3Usn,
+      member3Department: data.member3Department,
+      member3Phone: data.member3Phone,
+      member4Name: data.member4Name,
+      member4Usn: data.member4Usn,
+      member4Department: data.member4Department,
+      member4Phone: data.member4Phone,
+      paymentScreenshot: data.paymentScreenshot || null,
       timestamp: new Date().toISOString(),
     };
-    
-    try {
-      // Save to 'workshop_registrations' table
-      const { error } = await supabase
-        .from('workshop_registrations')
-        .insert([formData]);
-      
-      if (error) {
-        console.error('Supabase error:', error);
-        toast({
-          title: "Error",
-          description: `Failed to submit: ${error.message}`,
-          variant: "destructive",
-        });
-        return;
-      }
-      
+
+    console.log("📤 Submitting workshop data:", formData);
+
+    const { error } = await supabase
+      .from('workshop_registrations')
+      .insert([formData])
+      .select();
+
+    if (!error) {
+      console.log("✅ Workshop submitted successfully");
       toast({
         title: "Registration Successful! 🎉",
-        description: "Your workshop registration has been submitted to the cloud.",
+        description: "Your workshop registration has been submitted.",
       });
       reset();
       setIsOpen(false);
-    } catch (err) {
-      console.error('Submission error:', err);
+    } else {
+      console.error("❌ Workshop error:", error);
       toast({
         title: "Error",
-        description: "Failed to submit registration. Please try again.",
+        description: `Failed to submit: ${error.message}`,
         variant: "destructive",
       });
     }
@@ -286,7 +304,7 @@ export const WorkshopForm = () => {
             <img src="/images/liftoff.png" alt="Lift-Off Workshop" className="h-full object-contain rounded-lg" />
           </div>
         </DialogHeader>
-        
+
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
           {/* Team Name Section */}
           <div className="mb-8">
@@ -324,17 +342,28 @@ export const WorkshopForm = () => {
                 {errors.usn && <p className="text-red-500 text-sm">{errors.usn.message}</p>}
               </div>
 
+              {/* ✅ FIXED: Use Controller for Year Select */}
               <div>
                 <Label htmlFor="year">Year *</Label>
-                <Select onValueChange={(value) => register("year").onChange({ target: { value } })}>
-                  <SelectTrigger>
-                    <SelectValue placeholder="Select year" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="1st">1st Year</SelectItem>
-                    <SelectItem value="2nd">2nd Year</SelectItem>
-                  </SelectContent>
-                </Select>
+                <Controller
+                  name="year"
+                  control={control}
+                  rules={{ required: "Year is required" }}
+                  render={({ field }) => (
+                    <Select onValueChange={field.onChange} value={field.value}>
+                      <SelectTrigger>
+                        <SelectValue placeholder="Select year" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="1st">1st Year</SelectItem>
+                        <SelectItem value="2nd">2nd Year</SelectItem>
+                        <SelectItem value="3rd">3rd Year</SelectItem>
+                        <SelectItem value="4th">4th Year</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  )}
+                />
+                {errors.year && <p className="text-red-500 text-sm">{errors.year.message}</p>}
               </div>
 
               <div>
@@ -351,7 +380,7 @@ export const WorkshopForm = () => {
                 <Label htmlFor="phoneNumber">Phone Number *</Label>
                 <Input
                   id="phoneNumber"
-                  {...register("phoneNumber", { 
+                  {...register("phoneNumber", {
                     required: "Phone number is required",
                     pattern: { value: /^[0-9]{10}$/, message: "Enter valid 10-digit number" }
                   })}
@@ -365,11 +394,11 @@ export const WorkshopForm = () => {
                 <Input
                   id="email"
                   type="email"
-                  {...register("email", { 
+                  {...register("email", {
                     required: "Email is required",
                     pattern: { value: /^\S+@\S+$/i, message: "Enter valid email" }
                   })}
-                  placeholder="Enter email address"
+                  placeholder="Enter your email address"
                 />
                 {errors.email && <p className="text-red-500 text-sm">{errors.email.message}</p>}
               </div>
@@ -414,7 +443,7 @@ export const WorkshopForm = () => {
                 <Label htmlFor="member2Phone">Phone Number *</Label>
                 <Input
                   id="member2Phone"
-                  {...register("member2Phone", { 
+                  {...register("member2Phone", {
                     required: "Phone number is required",
                     pattern: { value: /^[0-9]{10}$/, message: "Enter valid 10-digit number" }
                   })}
@@ -463,7 +492,7 @@ export const WorkshopForm = () => {
                 <Label htmlFor="member3Phone">Phone Number *</Label>
                 <Input
                   id="member3Phone"
-                  {...register("member3Phone", { 
+                  {...register("member3Phone", {
                     required: "Phone number is required",
                     pattern: { value: /^[0-9]{10}$/, message: "Enter valid 10-digit number" }
                   })}
@@ -512,7 +541,7 @@ export const WorkshopForm = () => {
                 <Label htmlFor="member4Phone">Phone Number *</Label>
                 <Input
                   id="member4Phone"
-                  {...register("member4Phone", { 
+                  {...register("member4Phone", {
                     required: "Phone number is required",
                     pattern: { value: /^[0-9]{10}$/, message: "Enter valid 10-digit number" }
                   })}
