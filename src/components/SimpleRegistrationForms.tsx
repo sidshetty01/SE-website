@@ -43,7 +43,7 @@ interface WorkshopFormData {
   member4Usn: string;
   member4Department: string;
   member4Phone: string;
-  paymentScreenshot: string;
+  transactionId: string;
 }
 
 export const RecruitmentForm = () => {
@@ -258,7 +258,7 @@ export const WorkshopForm = () => {
       member4Usn: data.member4Usn,
       member4Department: data.member4Department,
       member4Phone: data.member4Phone,
-      paymentScreenshot: data.paymentScreenshot || null,
+      transactionId: data.transactionId || null,
       timestamp: new Date().toISOString(),
     };
 
@@ -562,20 +562,19 @@ export const WorkshopForm = () => {
                 <div className="space-y-2">
                   <p className="font-semibold">Amount: ₹400</p>
                   <p className="text-sm text-muted-foreground">1. Scan the QR code to pay</p>
-                  <p className="text-sm text-muted-foreground">2. Take a screenshot of the payment confirmation</p>
-                  <p className="text-sm text-muted-foreground">3. Upload the screenshot below</p>
+                  <p className="text-sm text-muted-foreground">2. Copy the transaction ID</p>
+                  <p className="text-sm text-muted-foreground">3. Paste the transaction id below!</p>
                 </div>
               </div>
             </div>
-            <Label htmlFor="paymentScreenshot">Payment Screenshot *</Label>
+            <Label htmlFor="transactionId">Enter transaction id*</Label>
             <Input
-              id="paymentScreenshot"
-              type="file"
-              accept="image/*"
-              {...register("paymentScreenshot", { required: "Payment screenshot is required" })}
-              className="cursor-pointer"
+              id="transactionId"
+              {...register("transactionId", {required: "Transaction ID is required"})}
+              placeholder="Enter payment transaction ID"
+              type="text"
             />
-            {errors.paymentScreenshot && <p className="text-red-500 text-sm">{errors.paymentScreenshot.message}</p>}
+            {errors.transactionId && <p className="text-red-500 text-sm">{errors.transactionId.message}</p>}
           </div>
 
           <Button type="submit" className="w-full bg-gradient-to-r from-accent to-primary">

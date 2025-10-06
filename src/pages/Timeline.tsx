@@ -121,7 +121,7 @@ const Timeline = () => {
           </p>
         </motion.div>
 
-        <Tabs defaultValue="journey" className="w-full">
+  <Tabs defaultValue="upcoming" className="w-full">
           <TabsList className="grid grid-cols-2 max-w-md mx-auto mb-10">
             <TabsTrigger value="upcoming">Upcoming Events</TabsTrigger>
             <TabsTrigger value="journey">Our Journey</TabsTrigger>
