@@ -35,14 +35,14 @@ interface WorkshopFormData {
   member2Usn: string;
   member2Department: string;
   member2Phone: string;
-  member3Name: string;
-  member3Usn: string;
-  member3Department: string;
-  member3Phone: string;
-  member4Name: string;
-  member4Usn: string;
-  member4Department: string;
-  member4Phone: string;
+  member3Name?: string;
+  member3Usn?: string;
+  member3Department?: string;
+  member3Phone?: string;
+  member4Name?: string;
+  member4Usn?: string;
+  member4Department?: string;
+  member4Phone?: string;
   transactionId: string;
 }
 
@@ -459,41 +459,40 @@ export const WorkshopForm = () => {
             <h3 className="text-lg font-semibold">Team Member 3</h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
-                <Label htmlFor="member3Name">Full Name *</Label>
+                <Label htmlFor="member3Name">Full Name</Label>
                 <Input
                   id="member3Name"
-                  {...register("member3Name", { required: "Member 3 name is required" })}
+                  {...register("member3Name")}
                   placeholder="Enter member's name"
                 />
                 {errors.member3Name && <p className="text-red-500 text-sm">{errors.member3Name.message}</p>}
               </div>
 
               <div>
-                <Label htmlFor="member3Usn">USN *</Label>
+                <Label htmlFor="member3Usn">USN</Label>
                 <Input
                   id="member3Usn"
-                  {...register("member3Usn", { required: "Member 3 USN is required" })}
+                  {...register("member3Usn")}
                   placeholder="Enter member's USN"
                 />
                 {errors.member3Usn && <p className="text-red-500 text-sm">{errors.member3Usn.message}</p>}
               </div>
 
               <div>
-                <Label htmlFor="member3Department">Department *</Label>
+                <Label htmlFor="member3Department">Department</Label>
                 <Input
                   id="member3Department"
-                  {...register("member3Department", { required: "Member 3 department is required" })}
+                  {...register("member3Department")}
                   placeholder="e.g., Computer Science"
                 />
                 {errors.member3Department && <p className="text-red-500 text-sm">{errors.member3Department.message}</p>}
               </div>
 
               <div>
-                <Label htmlFor="member3Phone">Phone Number *</Label>
+                <Label htmlFor="member3Phone">Phone Number</Label>
                 <Input
                   id="member3Phone"
                   {...register("member3Phone", {
-                    required: "Phone number is required",
                     pattern: { value: /^[0-9]{10}$/, message: "Enter valid 10-digit number" }
                   })}
                   placeholder="Enter 10-digit mobile number"
@@ -508,41 +507,40 @@ export const WorkshopForm = () => {
             <h3 className="text-lg font-semibold">Team Member 4</h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
-                <Label htmlFor="member4Name">Full Name *</Label>
+                <Label htmlFor="member4Name">Full Name</Label>
                 <Input
                   id="member4Name"
-                  {...register("member4Name", { required: "Member 4 name is required" })}
+                  {...register("member4Name")}
                   placeholder="Enter member's name"
                 />
                 {errors.member4Name && <p className="text-red-500 text-sm">{errors.member4Name.message}</p>}
               </div>
 
               <div>
-                <Label htmlFor="member4Usn">USN *</Label>
+                <Label htmlFor="member4Usn">USN</Label>
                 <Input
                   id="member4Usn"
-                  {...register("member4Usn", { required: "Member 4 USN is required" })}
+                  {...register("member4Usn")}
                   placeholder="Enter member's USN"
                 />
                 {errors.member4Usn && <p className="text-red-500 text-sm">{errors.member4Usn.message}</p>}
               </div>
 
               <div>
-                <Label htmlFor="member4Department">Department *</Label>
+                <Label htmlFor="member4Department">Department</Label>
                 <Input
                   id="member4Department"
-                  {...register("member4Department", { required: "Member 4 department is required" })}
+                  {...register("member4Department")}
                   placeholder="e.g., Computer Science"
                 />
                 {errors.member4Department && <p className="text-red-500 text-sm">{errors.member4Department.message}</p>}
               </div>
 
               <div>
-                <Label htmlFor="member4Phone">Phone Number *</Label>
+                <Label htmlFor="member4Phone">Phone Number</Label>
                 <Input
                   id="member4Phone"
                   {...register("member4Phone", {
-                    required: "Phone number is required",
                     pattern: { value: /^[0-9]{10}$/, message: "Enter valid 10-digit number" }
                   })}
                   placeholder="Enter 10-digit mobile number"

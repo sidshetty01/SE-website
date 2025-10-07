@@ -1,8 +1,10 @@
 import { Mail, Linkedin, Twitter } from "lucide-react";
+import { useState } from "react";
 import { teamByYear } from "@/data/team";
 import { motion } from "framer-motion";
 
 const Team = () => {
+  const [visibleEmail, setVisibleEmail] = useState<string | null>(null);
 
   return (
     <div className="min-h-screen py-20 px-4">
@@ -84,13 +86,28 @@ const Team = () => {
                       <h3 className="text-xl font-bold mb-2">{member.name}</h3>
                       <p className="text-primary mb-4">{member.role}</p>
                       <div className="flex gap-3">
-                        <a 
-                          href={`mailto:${member.email || '#'}`}
-                          className="p-2 rounded-full bg-primary/10 hover:bg-primary/20 transition-colors"
-                          title="Send Email"
-                        >
-                          <Mail className="h-4 w-4 text-primary" />
-                        </a>
+                        {member.email ? (
+                          <button
+                            type="button"
+                            onClick={() =>
+                              setVisibleEmail(
+                                visibleEmail === member.email ? null : member.email
+                              )
+                            }
+                            className="p-2 rounded-full bg-primary/10 hover:bg-primary/20 transition-colors"
+                            title={`Show email for ${member.name}`}
+                          >
+                            <Mail className="h-4 w-4 text-primary" />
+                          </button>
+                        ) : (
+                          <button
+                            className="p-2 rounded-full bg-primary/5 text-muted-foreground cursor-not-allowed"
+                            title="Email not available"
+                            aria-disabled
+                          >
+                            <Mail className="h-4 w-4" />
+                          </button>
+                        )}
                         <a 
                           href={member.linkedin || '#'}
                           target="_blank"
@@ -110,6 +127,12 @@ const Team = () => {
                           <Twitter className="h-4 w-4 text-primary" />
                         </a>
                       </div>
+
+                      {visibleEmail === member.email && (
+                        <div className="mt-3 text-sm text-muted-foreground break-words">
+                          {member.email}
+                        </div>
+                      )}
                     </div>
                   </motion.div>
                 ))}

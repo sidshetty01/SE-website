@@ -11,6 +11,24 @@ export type TeamByYear = Record<string, TeamMember[]>;
 
 // Centralized team data used by Team page and Login lookup
 export const teamByYear: TeamByYear = {
+  "Faculty Coordinators": [
+    {
+      name: "Dr Shivasiddaramaiah A G",
+      role: "Department of Mechanical Engineering",
+      image: "/images/fcAGS.jpg",
+      email: "agshivasiddaramaiah@sit.ac.in",
+      linkedin: "#",
+      twitter: "#",
+    },
+    {
+      name: "Dr Sunitha. N R",
+      role: "Department of Computer Science and Engineering",
+      image: "/images/fcSNR.jpeg",
+      email: "nrsunitha@sit.ac.in",
+      linkedin: "#",
+      twitter: "#",
+    },
+  ],
   "4th Year": [
     {
       name: "Shivam Deo",
