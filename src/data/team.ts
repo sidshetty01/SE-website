@@ -174,7 +174,7 @@ export const teamByYear: TeamByYear = {
     {
       name: "Adhirath Kyatarmal",
       role: "Automation",
-      image: "/images/2Adhirath Katyarmal.HEIC",
+      image: "/images/2Adhirath Katyarmal.jpg",
       email: "adhirathkatyarmal@gmail.com",
       linkedin: "https://www.linkedin.com/in/adhirath-k-9581b2341?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app",
       twitter: "",

@@ -159,7 +159,7 @@ const Login = () => {
                     <Input
                       id="email"
                       type="email"
-                      placeholder="admin@example.com"
+                      placeholder="Enter the email"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       className="pl-10"
