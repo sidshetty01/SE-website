@@ -57,12 +57,12 @@ const Home = () => {
             <h1 className="text-5xl md:text-7xl font-bold mb-6">
               <span className="glow-primary">Soaring Eagles</span>
             </h1>
-            <p className="text-2xl md:text-3xl mb-4 text-gradient font-semibold">
-              Aerial Robotics Club
-            </p>
-            <p className="text-lg md:text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
-              Drones & RC Planes
-            </p>
+              <p className="text-2xl md:text-3xl mb-4 font-semibold">
+                Aerodesign Team
+              </p>
+              <p className="text-lg mb-8 text-muted-foreground max-w-2xl mx-auto">
+                Where ideas take flight
+              </p>
           </motion.div>
 
           <motion.div
@@ -92,8 +92,8 @@ const Home = () => {
             className="flex flex-wrap gap-4 justify-center"
           >
             <Button variant="hero" size="lg" className="group" asChild>
-              <Link to="/projects">
-                Explore Projects
+              <Link to="/timeline?tab=upcoming">
+                Register here
                 <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
               </Link>
             </Button>

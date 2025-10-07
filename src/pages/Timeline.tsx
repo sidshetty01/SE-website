@@ -1,9 +1,20 @@
 import { motion } from "framer-motion";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { RecruitmentForm, WorkshopForm } from "@/components/SimpleRegistrationForms";
-import seEmblem from "../../public/images/club_logo.png";
+import { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 
 const Timeline = () => {
+  const location = useLocation();
+  const [defaultTab, setDefaultTab] = useState("upcoming");
+
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    const tab = params.get("tab");
+    if (tab === "journey" || tab === "upcoming") {
+      setDefaultTab(tab);
+    }
+  }, [location.search]);
   const timelineEvents = [
     {
       year: "2025",
@@ -16,12 +27,6 @@ const Timeline = () => {
       title: "SAEINDIA DDC Workshop P1 -NSS College of Engineering, Palakkad  ",
       description: "Drone Development Challenge (DDC) Workshop 2025 – NSS College of Engineering, Palakkad (organized by SAEINDIA Southern Section). Our team, Soaring Eagles, designed, built, and successfully flew a fixed-wing UAV, gaining hands-on experience in aerodynamics, electronics, and UAV applications.",
       image: "/images/2025DDC.jpeg",
-    },
-    {
-      year: "2019",
-      title: "SAEISS Aero Design Challenge-SRM IST, Chennai ",
-      description: "Secured 33rd rank in a national UAV competition featuring 144 teams. We participated in the micro class, where the challenge was to design a fixed-wing UAV capable of lifting maximum payload within strict size and weight limits. Aircraft were judged on design, innovation, and flight performance.",
-      image: "/images/2019ADDC.jpeg",
     },
     {
       year: "2025",
@@ -52,6 +57,12 @@ const Timeline = () => {
       title: "International Rank 23rd in SAE Aero Design 2020, Texas, USA",
       description: "Competed in SAE International’s premier student aerospace competition, where teams design, fabricate, and demonstrate the flight performance of a radio-controlled aircraft. The challenge focused on optimizing lift, payload efficiency, and flight endurance under specific design and mission constraints.",
       image: "/images/2020International.jpeg",
+    },
+    {
+      year: "2019",
+      title: "SAEISS Aero Design Challenge-SRM IST, Chennai ",
+      description: "Secured 33rd rank in a national UAV competition featuring 144 teams. We participated in the micro class, where the challenge was to design a fixed-wing UAV capable of lifting maximum payload within strict size and weight limits. Aircraft were judged on design, innovation, and flight performance.",
+      image: "/images/2019ADDC.jpeg",
     },
     {
       year: "2019",
@@ -121,7 +132,7 @@ const Timeline = () => {
           </p>
         </motion.div>
 
-  <Tabs defaultValue="upcoming" className="w-full">
+  <Tabs defaultValue={defaultTab} className="w-full">
           <TabsList className="grid grid-cols-2 max-w-md mx-auto mb-10">
             <TabsTrigger value="upcoming">Upcoming Events</TabsTrigger>
             <TabsTrigger value="journey">Our Journey</TabsTrigger>
@@ -141,7 +152,7 @@ const Timeline = () => {
                   >
                     <div className="absolute left-0 flex items-center justify-center">
                       <div className="w-16 h-16 rounded-full bg-background/60 border border-primary/30 shadow-glow-strong overflow-hidden">
-                        <img src={seEmblem} alt="SE Emblem" className="w-full h-full object-cover" />
+                        <img src="/images/club_logo.png" alt="SE Emblem" className="w-full h-full object-cover" />
                       </div>
                     </div>
 
