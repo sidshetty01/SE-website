@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { RecruitmentForm, WorkshopForm } from "@/components/SimpleRegistrationForms";
-import seEmblem from "../../image (2) (1).png";
+import seEmblem from "../../public/images/club_logo.png";
 
 const Timeline = () => {
   const timelineEvents = [

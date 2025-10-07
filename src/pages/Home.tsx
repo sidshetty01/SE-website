@@ -3,7 +3,7 @@ import { ArrowRight, Zap, Users, Trophy } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import heroImage from "@/assets/hero-drones.jpg";
-import seEmblem from "../../image (2) (1).png";
+import seEmblem from "../../public/images/club_logo.png";
 
 const Home = () => {
   return (
