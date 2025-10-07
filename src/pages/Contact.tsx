@@ -79,13 +79,13 @@ const Contact = () => {
         </motion.div>
 
         <div className="grid lg:grid-cols-2 gap-12">
-          {/* Contact Info */}
+          {/* Contact Info: show second on mobile, first on desktop */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
-            className="space-y-8"
+            className="space-y-8 order-2 lg:order-1"
           >
             <div className="card-glow p-8 rounded-xl glass">
               <h2 className="text-2xl font-bold mb-6 text-gradient">Contact Information</h2>
@@ -144,12 +144,13 @@ const Contact = () => {
             
           </motion.div>
 
-          {/* Contact Form */}
+          {/* Contact Form: show first on mobile, second on desktop */}
           <motion.div
             initial={{ opacity: 0, x: 50 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
+            className="order-1 lg:order-2"
           >
             <form onSubmit={handleSubmit} className="card-glow p-8 rounded-xl glass space-y-6">
               <div>
