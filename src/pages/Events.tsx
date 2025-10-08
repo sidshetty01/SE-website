@@ -5,13 +5,13 @@ import { Button } from "@/components/ui/button";
 
 const Events: React.FC = () => {
   return (
-    <div className="min-h-screen pt-20 pb-12 px-4">
+    <div className="min-h-screen pt-16 pb-8 px-2 lg:px-4">
       <div className="container mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-8"
+          className="text-center mb-6"
         >
           <h1 className="text-5xl font-bold glow-primary mb-3">Events</h1>
           <p className="text-muted-foreground max-w-2xl mx-auto">Upcoming and past events from the Soaring Eagles</p>

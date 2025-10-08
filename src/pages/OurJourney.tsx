@@ -84,64 +84,71 @@ const timelineEvents = [
 const OurJourney: React.FC = () => {
   return (
     <div className="min-h-screen py-20 px-4">
-      <div className="container mx-auto">
+  <div className="container mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           className="text-center mb-10"
         >
-          <h1 className="text-5xl font-bold mb-3 glow-primary">Our Journey</h1>
+          <h1 className="text-4xl font-bold mb-3 glow-primary">Our Journey</h1>
           <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
             A look at where we've been and how we grew
           </p>
         </motion.div>
 
         <div className="space-y-12">
-          {timelineEvents.map((event, index) => (
-            <motion.div
-              key={event.year + index}
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              viewport={{ once: true }}
-              className={`w-full flex flex-col lg:flex-row${index % 2 !== 0 ? '-reverse' : ''} gap-8 items-center`}
-              style={{ maxWidth: '100%' }}
-            >
-              {/* Image */}
-              <div className="w-full lg:w-1/2">
-                <div className="relative group overflow-hidden rounded-xl card-glow">
-                  <img
-                    src={event.image}
-                    alt={event.title}
-                    className="w-full h-80 object-cover group-hover:scale-110 transition-transform duration-500"
-                    style={{ maxWidth: '100%', width: '100%' }}
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent opacity-60" />
+          {timelineEvents.map((item, index) => (
+            <React.Fragment key={item.year + index}>
+              <motion.div
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+                viewport={{ once: true }}
+                className={`w-full flex flex-col lg:flex-row${index % 2 !== 0 ? '-reverse' : ''} gap-8 items-center`}
+                style={{ maxWidth: '100%' }}
+              >
+                {/* Image */}
+                <div className="w-full lg:w-1/2">
+                  <div className="relative group overflow-hidden rounded-xl card-glow">
+                    <img
+                      src={item.image}
+                      alt={item.title}
+                      className="w-full h-80 object-cover group-hover:scale-110 transition-transform duration-500"
+                      style={{ maxWidth: '100%', width: '100%' }}
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent opacity-60" />
+                  </div>
                 </div>
-              </div>
-              {/* Content */}
-              <div className="w-full lg:w-1/2 space-y-4">
-                <motion.h2
-                  initial={{ opacity: 0, x: index % 2 === 0 ? -30 : 30 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.6, delay: 0.3 }}
-                  viewport={{ once: true }}
-                  className="text-3xl font-bold text-gradient"
-                >
-                  {event.year}: {event.title}
-                </motion.h2>
-                <motion.p
-                  initial={{ opacity: 0, x: index % 2 === 0 ? -30 : 30 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.6, delay: 0.4 }}
-                  viewport={{ once: true }}
-                  className="text-muted-foreground text-lg"
-                >
-                  {event.description}
-                </motion.p>
-              </div>
-            </motion.div>
+                {/* Content */}
+                <div className="w-full lg:w-1/2 space-y-4">
+                  <motion.h2
+                    initial={{ opacity: 0, x: index % 2 === 0 ? -30 : 30 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.6, delay: 0.3 }}
+                    viewport={{ once: true }}
+                    className="text-xl lg:text-2xl font-bold text-gradient"
+                  >
+                    {item.year}: {item.title}
+                  </motion.h2>
+                  <motion.p
+                    initial={{ opacity: 0, x: index % 2 === 0 ? -30 : 30 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.6, delay: 0.4 }}
+                    viewport={{ once: true }}
+                    className="text-muted-foreground text-sm lg:text-base"
+                  >
+                    {item.description}
+                  </motion.p>
+                </div>
+              </motion.div>
+              {/* separator */}
+              {index !== timelineEvents.length - 1 && (
+                <div className="w-full flex justify-center">
+                  <div className="w-11/12 h-px bg-muted-foreground/30 my-4" />
+                </div>
+              )}
+            </React.Fragment>
           ))}
         </div>
         <motion.div

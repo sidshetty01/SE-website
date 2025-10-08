@@ -23,8 +23,8 @@ const UpcomingEvents: React.FC = () => {
   ];
 
   return (
-    <div className="min-h-screen py-20 px-4">
-      <div className="container mx-auto">
+    <div className="min-h-screen py-12 px-2 lg:px-4">
+      <div className="container mx-auto px-2 lg:px-0">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
@@ -37,9 +37,10 @@ const UpcomingEvents: React.FC = () => {
           </p>
         </motion.div>
 
-        <div className="relative">
-          <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-gradient-to-b from-primary via-accent to-primary" />
-          <div className="space-y-12">
+          <div className="relative">
+          {/* vertical line + emblem hidden on small screens */}
+          <div className="hidden sm:block absolute left-8 top-0 bottom-0 w-0.5 bg-gradient-to-b from-primary via-accent to-primary" />
+          <div className="space-y-8">
             {upcomingEvents.map((event, index) => (
               <motion.div
                 key={event.title}
@@ -47,22 +48,23 @@ const UpcomingEvents: React.FC = () => {
                 whileInView={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 viewport={{ once: true }}
-                className="relative pl-20"
+                className="relative pl-2 sm:pl-10 lg:pl-20"
               >
-                <div className="absolute left-0 flex items-center justify-center">
-                  <div className="w-16 h-16 rounded-full bg-background/60 border border-primary/30 shadow-glow-strong overflow-hidden">
-                    <img src="/images/club_logo.png" alt="SE Emblem" className="w-full h-full object-cover" />
+                  {/* emblem shown only on small+ screens */}
+                  <div className="hidden sm:absolute sm:left-0 sm:flex sm:items-center sm:justify-center">
+                    <div className="w-10 h-10 rounded-full bg-background/60 border border-primary/30 shadow-glow-strong overflow-hidden">
+                      <img src="/images/club_logo.png" alt="SE Emblem" className="w-full h-full object-cover" />
+                    </div>
                   </div>
-                </div>
 
-                <div className="card-glow p-6 rounded-xl glass group cursor-pointer">
-                  <div className="flex items-start justify-between mb-3">
-                    <span className="text-3xl font-bold text-gradient">{event.date}</span>
-                  </div>
-                  <h3 className="text-2xl font-bold mb-3 group-hover:text-primary transition-colors">
-                    {event.title}
-                  </h3>
-                  <p className="text-muted-foreground mb-4">{event.description}</p>
+                  <div className="card-glow p-3 sm:p-5 rounded-xl glass group cursor-pointer">
+                    <div className="flex items-start justify-between mb-2">
+                      <span className="text-xl sm:text-3xl font-bold text-gradient">{event.date}</span>
+                    </div>
+                    <h3 className="text-lg sm:text-2xl font-bold mb-2 sm:mb-3 group-hover:text-primary transition-colors">
+                      {event.title}
+                    </h3>
+                    <p className="text-muted-foreground mb-3 text-sm sm:text-base">{event.description}</p>
 
                   {/* Add registration buttons for specific events */}
                   {event.title === "Lift-Off Workshop" && <WorkshopForm />}

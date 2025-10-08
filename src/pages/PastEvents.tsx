@@ -2,18 +2,7 @@ import { motion } from "framer-motion";
 import React from "react";
 
 const timelineEvents = [
-    {
-      year: "2025",
-      title: " Paper Presentation SIT Robocor",
-      venue: "SIT, Tumkur, Karnataka. ",
-      date: " 22nd May 2025 ",
-      about:
-        " A technical paper presentation competition held as part of Robocor, focusing on innovations.",
-      outcome:
-        "Presented a research paper on UAV design and autonomous navigation systems. Selected among the top 5 papers from over 50+ entries, showcasing strong innovation and problem-solving approach.",
-      image: "/images/pastRobocor.png",
-      description: undefined,
-    },
+   
   {
     year: "2025",
     title: "Technical Presentation in association with IIC SIT",
@@ -62,7 +51,7 @@ const PastEvents: React.FC = () => {
           transition={{ duration: 0.6 }}
           className="text-center mb-10"
         >
-          <h1 className="text-5xl font-bold mb-3 glow-primary">Past Events</h1>
+              <h1 className="text-4xl font-bold mb-3 glow-primary">Past Events</h1>
           <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
             A gallery of events we've completed
           </p>
@@ -70,71 +59,78 @@ const PastEvents: React.FC = () => {
 
         <div className="space-y-12">
           {timelineEvents.map((event, index) => (
-            <motion.div
-              key={event.year + index}
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              viewport={{ once: true }}
-              className={`w-full flex flex-col lg:flex-row${index % 2 !== 0 ? '-reverse' : ''} gap-8 items-center`}
-              style={{ maxWidth: '100%' }}
-            >
-              {/* Image */}
-              <div className="w-full lg:w-1/2">
-                <div className="relative group overflow-hidden rounded-xl card-glow">
-                  <img
-                    src={event.image}
-                    alt={event.title}
-                    className="w-full h-80 object-cover group-hover:scale-110 transition-transform duration-500"
-                    style={{ maxWidth: '100%', width: '100%' }}
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent opacity-60" />
+            <React.Fragment key={event.year + index}>
+              <motion.div
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+                viewport={{ once: true }}
+                className={`w-full flex flex-col lg:flex-row${index % 2 !== 0 ? '-reverse' : ''} gap-8 items-center`}
+                style={{ maxWidth: '100%' }}
+              >
+                {/* Image */}
+                <div className="w-full lg:w-1/2">
+                  <div className="relative group overflow-hidden rounded-xl card-glow">
+                    <img
+                      src={event.image}
+                      alt={event.title}
+                      className="mx-auto block max-w-full h-auto object-contain transition-transform duration-500"
+                      style={{ width: 'auto', maxWidth: '100%' }}
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent opacity-60" />
+                  </div>
                 </div>
-              </div>
-              {/* Content */}
-              <div className="w-full lg:w-1/2 space-y-4">
-                <motion.h2
-                  initial={{ opacity: 0, x: index % 2 === 0 ? -30 : 30 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.6, delay: 0.3 }}
-                  viewport={{ once: true }}
-                  className="text-3xl font-bold text-gradient"
-                >
-                  {event.year}: {event.title}
-                </motion.h2>
-                <motion.div
-                  initial={{ opacity: 0, x: index % 2 === 0 ? -30 : 30 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.6, delay: 0.4 }}
-                  viewport={{ once: true }}
-                  className="text-muted-foreground text-lg space-y-2"
-                >
-                  {event.venue && (
-                    <p>
-                      <span className="font-semibold">Venue:</span> {event.venue}
-                    </p>
-                  )}
-                  {event.date && (
-                    <p>
-                      <span className="font-semibold">Date:</span> {event.date}
-                    </p>
-                  )}
-                  {event.about && (
-                    <p>
-                      <span className="font-semibold">About:</span> {event.about}
-                    </p>
-                  )}
-                  {event.outcome && (
-                    <p>
-                      <span className="font-semibold">Outcome:</span> {event.outcome}
-                    </p>
-                  )}
-                  {!event.about && !event.outcome && event.description && (
-                    <p>{event.description}</p>
-                  )}
-                </motion.div>
-              </div>
-            </motion.div>
+                {/* Content */}
+                <div className="w-full lg:w-1/2 space-y-4">
+                  <motion.h2
+                    initial={{ opacity: 0, x: index % 2 === 0 ? -30 : 30 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.6, delay: 0.3 }}
+                    viewport={{ once: true }}
+                    className="text-xl lg:text-2xl font-bold text-gradient"
+                  >
+                    {event.year}: {event.title}
+                  </motion.h2>
+                  <motion.div
+                    initial={{ opacity: 0, x: index % 2 === 0 ? -30 : 30 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.6, delay: 0.4 }}
+                    viewport={{ once: true }}
+                    className="text-muted-foreground text-sm lg:text-base space-y-2"
+                  >
+                    {event.venue && (
+                      <p>
+                        <span className="font-semibold">Venue:</span> {event.venue}
+                      </p>
+                    )}
+                    {event.date && (
+                      <p>
+                        <span className="font-semibold">Date:</span> {event.date}
+                      </p>
+                    )}
+                    {event.about && (
+                      <p>
+                        <span className="font-semibold">About:</span> {event.about}
+                      </p>
+                    )}
+                    {event.outcome && (
+                      <p>
+                        <span className="font-semibold">Outcome:</span> {event.outcome}
+                      </p>
+                    )}
+                    {!event.about && !event.outcome && event.description && (
+                      <p>{event.description}</p>
+                    )}
+                  </motion.div>
+                </div>
+              </motion.div>
+              {/* separator between items */}
+              {index !== timelineEvents.length - 1 && (
+                <div className="w-full flex justify-center">
+                  <div className="w-11/12 h-px bg-muted-foreground/30 my-4" />
+                </div>
+              )}
+            </React.Fragment>
           ))}
         </div>
         <motion.div
