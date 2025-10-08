@@ -92,7 +92,7 @@ const Home = () => {
             className="flex flex-wrap gap-4 justify-center"
           >
             <Button variant="hero" size="lg" className="group" asChild>
-              <Link to="/timeline?tab=upcoming">
+              <Link to="/events/upcoming">
                 Register here
                 <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
               </Link>
@@ -125,9 +125,10 @@ const Home = () => {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <h2 className="text-4xl font-bold mb-4 glow-primary">What We Do</h2>
+            <h2 className="text-4xl font-bold mb-4 glow-primary">Mission</h2>
             <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-              Building the future of aerial robotics through innovation and collaboration
+              To be a national leader in student-driven autonomous aerial systems 
+development, recognized for innovation, impact, and technical excellence.
             </p>
           </motion.div>
 
@@ -136,17 +137,17 @@ const Home = () => {
               {
                 icon: Zap,
                 title: "Innovation",
-                description: "Pushing boundaries with cutting-edge drone and RC plane technology",
+                description: "To design and build high-performance UAVs for real-world mission applications.  ",
               },
               {
                 icon: Users,
                 title: "Collaboration",
-                description: "Working together to achieve extraordinary results in aerial robotics",
+                description: "To develop technical, leadership, and collaborative skills among members. ",
               },
               {
                 icon: Trophy,
                 title: "Excellence",
-                description: "Striving for the highest standards in every project we undertake",
+                description: "To represent our institution at the forefront of national aeromodelling competitions. ",
               },
             ].map((feature, index) => (
               <motion.div

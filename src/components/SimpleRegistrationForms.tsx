@@ -10,6 +10,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Users, Calendar } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import ConfirmationDialog from "@/components/ui/ConfirmationDialog";
 
 // Types for form data
 interface RecruitmentFormData {
@@ -51,6 +52,9 @@ export const RecruitmentForm = () => {
   const [isOpen, setIsOpen] = useState(false);
   const { toast } = useToast();
   const inCollegeClub = watch("inCollegeClub");
+  const [showConfirmationWorkshop, setShowConfirmationWorkshop] = useState(false);
+
+  const [showConfirmation, setShowConfirmation] = useState(false);
 
   const onSubmit = async (data: RecruitmentFormData) => {
     const formData = {
@@ -80,6 +84,7 @@ export const RecruitmentForm = () => {
       });
       reset();
       setIsOpen(false);
+      setShowConfirmation(true);
     } else {
       console.error("❌ Recruitment error:", error);
       toast({
@@ -228,6 +233,12 @@ export const RecruitmentForm = () => {
           </Button>
         </form>
       </DialogContent>
+      <ConfirmationDialog
+        open={showConfirmation}
+        onOpenChange={setShowConfirmation}
+        title="Registration Submitted"
+        message="Your recruitment form has been submitted. We'll reach back to you via email soon."
+      />
     </Dialog>
   );
 };
@@ -236,6 +247,7 @@ export const WorkshopForm = () => {
   const { register, handleSubmit, reset, control, formState: { errors } } = useForm<WorkshopFormData>(); // ✅ Add control
   const [isOpen, setIsOpen] = useState(false);
   const { toast } = useToast();
+  const [showConfirmationWorkshop, setShowConfirmationWorkshop] = useState(false);
 
   const onSubmit = async (data: WorkshopFormData) => {
     const formData = {
@@ -277,6 +289,7 @@ export const WorkshopForm = () => {
       });
       reset();
       setIsOpen(false);
+      setShowConfirmationWorkshop(true);
     } else {
       console.error("❌ Workshop error:", error);
       toast({
@@ -580,6 +593,14 @@ export const WorkshopForm = () => {
           </Button>
         </form>
       </DialogContent>
+      <ConfirmationDialog
+        open={showConfirmationWorkshop}
+        onOpenChange={setShowConfirmationWorkshop}
+        title="Registration Submitted"
+        message="Your workshop registration has been submitted. We'll reach back to you via email soon."
+      />
     </Dialog>
   );
 };
+
+// (moved into WorkshopForm)

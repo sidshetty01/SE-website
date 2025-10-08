@@ -17,8 +17,14 @@ const Projects = () => {
     tags: ["Quadcopter", "Autonomous", "PayloadDelivery"],
   },
   {
-   title: "Gajraj 2024",
-   description: "This fixed-wing RC plane was built for a prestigious TechFest competition at IIT Bombay, where our team proudly secured the 10th rank among 250+ teams.Designed for high lift, stability, and efficient flight performance, it excelled in both endurance and payload missions.The aircraft was entirely student-designed and fabricated, showcasing innovation in aerodynamics and control.It stands as a testament to our team’s engineering excellence and dedication to aeromodelling.",
+    title: "Gajraj 09 2024",
+    description: "This fixed-wing RC plane was built for a prestigious TechFest competition at IIT Bombay, where our team proudly secured the 10th rank among 250+ teams.Designed for high lift, stability, and efficient flight performance, it excelled in both endurance and payload missions.The aircraft was entirely student-designed and fabricated, showcasing innovation in aerodynamics and control.It stands as a testament to our team’s engineering excellence and dedication to aeromodelling.",
+    image: "/images/2024Gajaraj72.png",
+    tags: ["IITBombay", "Techfest", "FixedWing"],
+  },
+  {
+   title: "Gajraj 72 2024",
+   description: "This fixed-wing RC plane was built for a prestigious TechFest competition at IIT Bombay, where our team proudly secured the 15th rank among 250+ teams.Designed for high lift, stability, and efficient flight performance, it excelled in both endurance and payload missions.The aircraft was entirely student-designed and fabricated, showcasing innovation in aerodynamics and control.It stands as a testament to our team’s engineering excellence and dedication to aeromodelling.",
    image: "/images/ProjGajraj2024.jpg",
    tags: ["IITBombay", "Techfest", "FixedWing"],
  },
@@ -32,7 +38,7 @@ const Projects = () => {
   {
     title: "Abhyas 2024",
     description: "This RC plane was built by our team for the Wright Flight competition at TechFest NITK 2024.Designed and fabricated from scratch, it focused on aerodynamic efficiency and payload stability.The model showcased precise control, endurance, and innovative design.It marked a proud achievement for our Soaring Eagles Aeromodelling Team.",
-    image: "/images/projAbhyas.jpg",
+    image: "/images/2024NITK.png",
     tags: ["FixedWing", "Aerodynamics", "Competition"],
   },
     {

@@ -2,19 +2,19 @@ import { Link, useLocation } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import { useState } from "react";
 import { Button } from "./ui/button";
-import logo from "../../public/images/club_logo.png"
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
 
   const navLinks = [
-    { name: "Home", path: "/" },
-    { name: "Team", path: "/team" },
-    { name: "Projects", path: "/projects" },
-    { name: "Timeline", path: "/timeline" },
-    { name: "Contact", path: "/contact" },
-    { name: "Admin", path: "/admin" },
+  { name: "Home", path: "/" },
+  { name: "Team", path: "/team" },
+  { name: "Projects", path: "/projects" },
+  { name: "Events", path: "/events" },
+  { name: "Our Journey", path: "/our-journey" },
+  { name: "Contact", path: "/contact" },
+  { name: "Admin", path: "/admin" },
   ];
 
   const isActive = (path: string) => location.pathname === path;
@@ -26,7 +26,7 @@ const Navbar = () => {
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-3 group">
             <div className="relative">
-              <img src={logo} alt="Logo" className="h-8 w-8 rounded-md object-contain animate-float" />
+              <img src="/images/club_logo.png" alt="Logo" className="h-8 w-8 rounded-md object-contain animate-float" />
               <div className="absolute inset-0 bg-primary blur-xl opacity-50 group-hover:opacity-75 transition-opacity" />
             </div>
             <div>
