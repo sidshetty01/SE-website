@@ -314,7 +314,7 @@ export const WorkshopForm = () => {
             Lift-Off Workshop Registration (₹400)
           </DialogTitle>
           <div className="mt-4 flex justify-center h-48">
-            <img src="/images/liftoff.png" alt="Lift-Off Workshop" className="h-full object-contain rounded-lg" />
+            <img src="/images/projplane2017.jpg" alt="Lift-Off Workshop" className="h-full object-contain rounded-lg" />
           </div>
         </DialogHeader>
 

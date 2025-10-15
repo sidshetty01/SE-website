@@ -9,7 +9,7 @@ const UpcomingEvents: React.FC = () => {
       date: "Oct 2025",
       title: "Lift-Off Workshop",
       description:
-        "This workshop, for first- and second-year students, includes an introductory tech talk, glider making, flight practice, and a quiz, providing both foundational knowledge and hands-on experience in drones and aerial robotics.",
+        "Join us for a dynamic hands-on aeromodelling experience on 25th October 2025 at 2:00 PM in the Mech Seminar Hall (New Building), where first and second-year students will get the opportunity to learn the fundamentals of flight, build and test their own model aircraft, and experience the thrill of flying RC planes with live demonstrations. Participants will receive certificates, stand a chance to win prizes worth up to ₹5000, and engage in an exciting, team-based environment (up to 4 members per team). The registration fee is ₹400 per team—don’t miss this interactive event that brings the science of aerodynamics to life.",
       icon: undefined,
     },
     {
