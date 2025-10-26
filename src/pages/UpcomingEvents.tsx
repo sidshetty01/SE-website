@@ -5,13 +5,7 @@ import React from "react";
 
 const UpcomingEvents: React.FC = () => {
   const upcomingEvents = [
-    {
-      date: "Oct 2025",
-      title: "Lift-Off Workshop",
-      description:
-        "Join us for a dynamic hands-on aeromodelling experience on 25th October 2025 at 2:00 PM in the Mech Seminar Hall (New Building), where first and second-year students will get the opportunity to learn the fundamentals of flight, build and test their own model aircraft, and experience the thrill of flying RC planes with live demonstrations. Participants will receive certificates, stand a chance to win prizes worth up to ₹5000, and engage in an exciting, team-based environment (up to 4 members per team). The registration fee is ₹400 per team—don’t miss this interactive event that brings the science of aerodynamics to life.",
-      icon: undefined,
-    },
+    /* Lift-Off Workshop removed */
     {
       date: "Nov 2025",
       title: "Recruitments 2025-26",
@@ -67,7 +61,6 @@ const UpcomingEvents: React.FC = () => {
                     <p className="text-muted-foreground mb-3 text-sm sm:text-base">{event.description}</p>
 
                   {/* Add registration buttons for specific events */}
-                  {event.title === "Lift-Off Workshop" && <WorkshopForm />}
                   {event.title === "Recruitments 2025-26" && <RecruitmentForm />}
                 </div>
               </motion.div>

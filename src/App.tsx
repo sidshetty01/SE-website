@@ -11,8 +11,8 @@ import Home from "./pages/Home";
 import Team from "./pages/Team";
 import Projects from "./pages/Projects";
 import Events from "./pages/Events";
-import UpcomingEvents from "./pages/UpcomingEvents";
 import PastEvents from "./pages/PastEvents";
+import JoinUs from "./pages/JoinUs";
 import OurJourney from "./pages/OurJourney";
 import Contact from "./pages/Contact";
 import Admin from "./pages/Admin";
@@ -43,13 +43,10 @@ const App = () => (
             <Route path="/" element={<Home />} />
             <Route path="/team" element={<Team />} />
             <Route path="/projects" element={<Projects />} />
-            <Route path="/events" element={<Events />}>
-              <Route index element={<UpcomingEvents />} />
-              <Route path="upcoming" element={<UpcomingEvents />} />
-              <Route path="past" element={<PastEvents />} />
-            </Route>
+            <Route path="/events" element={<PastEvents />} />
+            <Route path="/join-us" element={<JoinUs />} />
             {/* legacy routes redirect to the new paths */}
-            <Route path="/upcoming-events" element={<UpcomingEvents />} />
+            <Route path="/upcoming-events" element={<PastEvents />} />
             <Route path="/our-journey" element={<OurJourney />} />
             <Route path="/contact" element={<Contact />} />
             

@@ -85,12 +85,7 @@ const Timeline = () => {
   ];
   
   const upcomingEvents = [
-    {
-      date: "Oct 2025",
-      title: "Lift-Off Workshop",
-      description: "This workshop, for first- and second-year students, includes an introductory tech talk, glider making, flight practice, and a quiz, providing both foundational knowledge and hands-on experience in drones and aerial robotics.",
-      icon: undefined,
-    },
+    /* Lift-Off Workshop removed */
     {
       date: "Nov 2025",
       title: "Recruitments 2025-26",
@@ -166,7 +161,6 @@ const Timeline = () => {
                       <p className="text-muted-foreground mb-4">{event.description}</p>
                       
                       {/* Add registration buttons for specific events */}
-                      {event.title === "Lift-Off Workshop" && <WorkshopForm />}
                       {event.title === "Recruitments 2025-26" && <RecruitmentForm />}
                     </div>
                   </motion.div>

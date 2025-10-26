@@ -2,7 +2,18 @@ import { motion } from "framer-motion";
 import React from "react";
 
 const timelineEvents = [
-   
+     {
+    year: "2025",
+    title: "Lift-Off Workshop",
+    venue: "SIT, Tumkur, Karnataka",
+    date: "22 October 2025",
+    about:
+      "A hands-on workshop organized by Soaring Eagles aimed at introducing 1st and 2nd-year students to the fundamentals of aerodynamics and RC plane design. The session included an engaging quiz on basic aerospace concepts followed by a practical activity where participants built and flight-tested their own gliders.",
+    outcome:
+    "Helped students gain a foundational understanding of flight mechanics and teamwork while sparking interest in aerial robotics through an interactive and enjoyable learning experience.",
+  image: "/images/liftoff.png",
+    description: undefined,
+  },
   {
     year: "2025",
     title: "Technical Presentation in association with IIC SIT",

@@ -47,7 +47,7 @@ interface WorkshopFormData {
   transactionId: string;
 }
 
-export const RecruitmentForm = () => {
+export const RecruitmentForm = ({ inline = false }: { inline?: boolean }) => {
   const { register, handleSubmit, watch, reset, control, formState: { errors } } = useForm<RecruitmentFormData>(); // ✅ Add control
   const [isOpen, setIsOpen] = useState(false);
   const { toast } = useToast();
@@ -95,6 +95,153 @@ export const RecruitmentForm = () => {
     }
   };
 
+  // Reusable form content (used for inline rendering and dialog content)
+  const formContent = (
+    <>
+      <div className="">
+        <div className="text-2xl font-bold text-gradient mb-4">Recruitment Registration 2025-26</div>
+      </div>
+
+      <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <Label htmlFor="name">Full Name *</Label>
+            <Input
+              id="name"
+              {...register("name", { required: "Name is required" })}
+              placeholder="Enter your full name"
+            />
+            {errors.name && <p className="text-red-500 text-sm">{errors.name.message}</p>}
+          </div>
+
+          {/* ✅ FIXED: Use Controller for Select */}
+          <div>
+            <Label htmlFor="year">Year *</Label>
+            <Controller
+              name="year"
+              control={control}
+              rules={{ required: "Year is required" }}
+              render={({ field }) => (
+                <Select onValueChange={field.onChange} value={field.value}>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select your year" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="1st">1st Year</SelectItem>
+                    <SelectItem value="2nd">2nd Year</SelectItem>
+                  </SelectContent>
+                </Select>
+              )}
+            />
+            {errors.year && <p className="text-red-500 text-sm">{errors.year.message}</p>}
+          </div>
+
+          <div>
+            <Label htmlFor="department">Department *</Label>
+            <Input
+              id="department"
+              {...register("department", { required: "Department is required" })}
+              placeholder="e.g., Computer Science"
+            />
+            {errors.department && <p className="text-red-500 text-sm">{errors.department.message}</p>}
+          </div>
+
+          <div>
+            <Label htmlFor="usn">USN *</Label>
+            <Input
+              id="usn"
+              {...register("usn", { required: "USN is required" })}
+              placeholder="Enter your USN"
+            />
+            {errors.usn && <p className="text-red-500 text-sm">{errors.usn.message}</p>}
+          </div>
+
+          <div>
+            <Label htmlFor="contactNumber">Contact Number *</Label>
+            <Input
+              id="contactNumber"
+              {...register("contactNumber", {
+                required: "Contact number is required",
+                pattern: { value: /^[0-9]{10}$/, message: "Enter valid 10-digit number" }
+              })}
+              placeholder="Enter 10-digit mobile number"
+            />
+            {errors.contactNumber && <p className="text-red-500 text-sm">{errors.contactNumber.message}</p>}
+          </div>
+        </div>
+
+        {/* ✅ FIXED: Use Controller for RadioGroup */}
+        <div>
+          <Label>Are you present in any college club? *</Label>
+          <Controller
+            name="inCollegeClub"
+            control={control}
+            rules={{ required: "Please select an option" }}
+            render={({ field }) => (
+              <RadioGroup
+                onValueChange={field.onChange}
+                value={field.value}
+                className="flex space-x-4 mt-2"
+              >
+                <div className="flex items-center space-x-2">
+                  <RadioGroupItem value="yes" id="yes" />
+                  <Label htmlFor="yes">Yes</Label>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <RadioGroupItem value="no" id="no" />
+                  <Label htmlFor="no">No</Label>
+                </div>
+              </RadioGroup>
+            )}
+          />
+          {errors.inCollegeClub && <p className="text-red-500 text-sm">{errors.inCollegeClub.message}</p>}
+        </div>
+
+        {inCollegeClub === "yes" && (
+          <div>
+            <Label htmlFor="clubName">Which club? *</Label>
+            <Input
+              id="clubName"
+              {...register("clubName", { required: inCollegeClub === "yes" ? "Club name is required" : false })}
+              placeholder="Enter club name"
+            />
+            {errors.clubName && <p className="text-red-500 text-sm">{errors.clubName.message}</p>}
+          </div>
+        )}
+
+        <div>
+          <Label htmlFor="skills">Skills *</Label>
+          <Textarea
+            id="skills"
+            {...register("skills", { required: "Skills are required" })}
+            placeholder="Describe your technical skills, interests, and relevant experience"
+            rows={4}
+          />
+          {errors.skills && <p className="text-red-500 text-sm">{errors.skills.message}</p>}
+        </div>
+
+        <Button type="submit" className="w-full bg-gradient-to-r from-primary to-accent">
+          Submit Registration
+        </Button>
+      </form>
+
+      <ConfirmationDialog
+        open={showConfirmation}
+        onOpenChange={setShowConfirmation}
+        title="Registration Submitted"
+        message="Your recruitment form has been submitted. We'll reach back to you via email soon."
+      />
+    </>
+  );
+
+  if (inline) {
+    return (
+      <div className="max-w-2xl mx-auto card-glow p-6 rounded-xl glass">
+        {formContent}
+      </div>
+    );
+  }
+
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
@@ -105,140 +252,11 @@ export const RecruitmentForm = () => {
       </DialogTrigger>
       <DialogContent className="max-w-2xl max-h-[80vh] overflow-y-auto">
         <DialogHeader>
-          <DialogTitle className="text-2xl font-bold text-gradient">
-            Recruitment Registration 2025-26
-          </DialogTitle>
+          <DialogTitle className="text-2xl font-bold text-gradient">Recruitment Registration 2025-26</DialogTitle>
         </DialogHeader>
 
-        <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div>
-              <Label htmlFor="name">Full Name *</Label>
-              <Input
-                id="name"
-                {...register("name", { required: "Name is required" })}
-                placeholder="Enter your full name"
-              />
-              {errors.name && <p className="text-red-500 text-sm">{errors.name.message}</p>}
-            </div>
-
-            {/* ✅ FIXED: Use Controller for Select */}
-            <div>
-              <Label htmlFor="year">Year *</Label>
-              <Controller
-                name="year"
-                control={control}
-                rules={{ required: "Year is required" }}
-                render={({ field }) => (
-                  <Select onValueChange={field.onChange} value={field.value}>
-                    <SelectTrigger>
-                      <SelectValue placeholder="Select your year" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="1st">1st Year</SelectItem>
-                      <SelectItem value="2nd">2nd Year</SelectItem>
-                    </SelectContent>
-                  </Select>
-                )}
-              />
-              {errors.year && <p className="text-red-500 text-sm">{errors.year.message}</p>}
-            </div>
-
-            <div>
-              <Label htmlFor="department">Department *</Label>
-              <Input
-                id="department"
-                {...register("department", { required: "Department is required" })}
-                placeholder="e.g., Computer Science"
-              />
-              {errors.department && <p className="text-red-500 text-sm">{errors.department.message}</p>}
-            </div>
-
-            <div>
-              <Label htmlFor="usn">USN *</Label>
-              <Input
-                id="usn"
-                {...register("usn", { required: "USN is required" })}
-                placeholder="Enter your USN"
-              />
-              {errors.usn && <p className="text-red-500 text-sm">{errors.usn.message}</p>}
-            </div>
-
-            <div>
-              <Label htmlFor="contactNumber">Contact Number *</Label>
-              <Input
-                id="contactNumber"
-                {...register("contactNumber", {
-                  required: "Contact number is required",
-                  pattern: { value: /^[0-9]{10}$/, message: "Enter valid 10-digit number" }
-                })}
-                placeholder="Enter 10-digit mobile number"
-              />
-              {errors.contactNumber && <p className="text-red-500 text-sm">{errors.contactNumber.message}</p>}
-            </div>
-          </div>
-
-          {/* ✅ FIXED: Use Controller for RadioGroup */}
-          <div>
-            <Label>Are you present in any college club? *</Label>
-            <Controller
-              name="inCollegeClub"
-              control={control}
-              rules={{ required: "Please select an option" }}
-              render={({ field }) => (
-                <RadioGroup
-                  onValueChange={field.onChange}
-                  value={field.value}
-                  className="flex space-x-4 mt-2"
-                >
-                  <div className="flex items-center space-x-2">
-                    <RadioGroupItem value="yes" id="yes" />
-                    <Label htmlFor="yes">Yes</Label>
-                  </div>
-                  <div className="flex items-center space-x-2">
-                    <RadioGroupItem value="no" id="no" />
-                    <Label htmlFor="no">No</Label>
-                  </div>
-                </RadioGroup>
-              )}
-            />
-            {errors.inCollegeClub && <p className="text-red-500 text-sm">{errors.inCollegeClub.message}</p>}
-          </div>
-
-          {inCollegeClub === "yes" && (
-            <div>
-              <Label htmlFor="clubName">Which club? *</Label>
-              <Input
-                id="clubName"
-                {...register("clubName", { required: inCollegeClub === "yes" ? "Club name is required" : false })}
-                placeholder="Enter club name"
-              />
-              {errors.clubName && <p className="text-red-500 text-sm">{errors.clubName.message}</p>}
-            </div>
-          )}
-
-          <div>
-            <Label htmlFor="skills">Skills *</Label>
-            <Textarea
-              id="skills"
-              {...register("skills", { required: "Skills are required" })}
-              placeholder="Describe your technical skills, interests, and relevant experience"
-              rows={4}
-            />
-            {errors.skills && <p className="text-red-500 text-sm">{errors.skills.message}</p>}
-          </div>
-
-          <Button type="submit" className="w-full bg-gradient-to-r from-primary to-accent">
-            Submit Registration
-          </Button>
-        </form>
+        {formContent}
       </DialogContent>
-      <ConfirmationDialog
-        open={showConfirmation}
-        onOpenChange={setShowConfirmation}
-        title="Registration Submitted"
-        message="Your recruitment form has been submitted. We'll reach back to you via email soon."
-      />
     </Dialog>
   );
 };
