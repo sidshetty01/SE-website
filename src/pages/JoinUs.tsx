@@ -14,7 +14,7 @@ const JoinUs: React.FC = () => {
         >
           <h1 className="text-4xl font-bold mb-3 glow-primary">Join Us</h1>
           <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-            Fill the form below to apply for recruitment — the form is displayed directly.
+            Fill the form below to apply for recruitment.
           </p>
         </motion.div>
 
